@@ -1,18 +1,24 @@
-# BYUI DS Portfolio Template
-## Building a Quarto Portfolo
+# Portfolio Landing Page (React)
 
-A template for a portfolio developed with Quarto and hosted on GitHub.
+This repository now uses React + Vite for a portfolio landing page.
 
-This is all configured so you only need to edit the source files in Quarto (.qmd). The website is generated and hosted automatically by GitHub.
+## Local development
 
-## Using this template
+1. Install dependencies: `npm install`
+2. Start dev server: `npm run dev`
+3. Build production files: `npm run build`
 
-1. Click on green button "Use this Tempalte" -> "Create a new Repo"
+## Deployment
 
-1. Choose a name for your repository
+Deployment is handled by GitHub Actions using `.github/workflows/publish.yml`.
 
-1. Important: check 'Include all branches' when creating the repository (because we will need the gh-pages branch to host the website).
+On each push to `main`, the workflow:
+1. Installs dependencies
+2. Builds the React app
+3. Deploys `dist/` to GitHub Pages
 
-1. Once your repo is created, remember to update the links to your GitHub repo in _quarto.yml, replacing every instance 'your_name'.
+If this is your first deploy with this workflow, set your repository Pages source to **GitHub Actions** in repository settings.
 
-1. The first time you publish to your repo use this command line string `quarto publish gh-pages` in the vs code terminal.
+## Legacy Quarto content
+
+Previous Quarto content is kept under `zz_legacy/` for reference.

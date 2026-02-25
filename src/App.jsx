@@ -1,0 +1,164 @@
+import { useEffect, useState } from "react";
+import { aboutParagraphs, contactLinks, projects } from "./data/content";
+
+const PAGES = ["about", "projects", "contact"];
+
+function getPageFromHash(hash) {
+  const normalized = hash.replace("#", "").toLowerCase();
+  return PAGES.includes(normalized) ? normalized : "about";
+}
+
+const ArrowRightIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
+
+const ExternalLinkIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+  </svg>
+);
+
+export default function App() {
+  const [page, setPage] = useState(() =>
+    typeof window === "undefined" ? "about" : getPageFromHash(window.location.hash)
+  );
+
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.location.hash = "about";
+    }
+
+    const handleHashChange = () => {
+      setPage(getPageFromHash(window.location.hash));
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  const highlightedProjects = projects.slice(0, 2);
+
+  return (
+    <div className="page">
+      <div className="glow-container">
+        <div className="glow glow-a" />
+        <div className="glow glow-b" />
+      </div>
+
+      <nav className="top-nav animate-in" aria-label="Primary">
+        <a className={`nav-link ${page === "about" ? "active" : ""}`} href="#about">
+          About
+        </a>
+        <a className={`nav-link ${page === "projects" ? "active" : ""}`} href="#projects">
+          Projects
+        </a>
+        <a className={`nav-link ${page === "contact" ? "active" : ""}`} href="#contact">
+          Contact
+        </a>
+      </nav>
+
+      <header className="hero animate-in delay-1">
+        <div className="eyebrow">
+          <span className="blink">_</span>
+          System.out.println("Portfolio")
+        </div>
+        <h1>
+          Hi, I am <span className="name-highlight">Lehi Gracia</span>.
+        </h1>
+        <p className="lead">
+          I build practical software products that blend security, performance, and usability so technology feels effortless for users.
+        </p>
+      </header>
+
+      <main className="page-content delay-2" key={page}>
+        {page === "about" && (
+          <div className="fade-in-section">
+            <section className="panel" id="about">
+              <h2>A Little Bit About Me</h2>
+              <div className="about-content">
+                {aboutParagraphs.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel" aria-label="Highlighted Projects">
+              <h2>Featured Code</h2>
+              <div className="grid">
+                {highlightedProjects.map((project, i) => (
+                  <article key={i} className="card">
+                    {project.image && (
+                      <img src={project.image} alt={project.title} className="card-image" />
+                    )}
+                    <div className="card-content">
+                      <h3>{project.title}</h3>
+                      <p>{project.shortDescription || project.description}</p>
+                      <div style={{ marginTop: 'auto' }}>
+                        <a href={project.url} className="card-link" target="_blank" rel="noreferrer">
+                          View Source <ExternalLinkIcon />
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {page === "projects" && (
+          <div className="fade-in-section">
+            <section className="panel" id="projects">
+              <h2>All Projects</h2>
+              <div className="grid">
+                {projects.map((project, i) => (
+                  <article key={i} className="card slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
+                    {project.image && (
+                      <img src={project.image} alt={project.title} className="card-image" />
+                    )}
+                    <div className="card-content">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                      <div style={{ marginTop: 'auto' }}>
+                        <a href={project.url} className="card-link" target="_blank" rel="noreferrer">
+                          View Source <ExternalLinkIcon />
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {page === "contact" && (
+          <div className="fade-in-section">
+            <section className="panel contact-panel" id="contact">
+              <h2>Initiate Connection</h2>
+              <p className="lead" style={{ margin: '0 auto 2.5rem' }}>
+                Open to opportunities in security, data science, and full-stack engineering.
+                Let's build something remarkable together.
+              </p>
+              <div className="hero-actions" style={{ justifyContent: 'center' }}>
+                {contactLinks.map((link, index) => (
+                  <a
+                    key={link.label}
+                    className={`btn ${index === 0 ? "btn-primary" : "btn-ghost"}`}
+                    href={link.url}
+                    target={link.url.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={link.url.startsWith("mailto:") ? undefined : "noreferrer"}
+                  >
+                    {link.label} {index === 0 && <ArrowRightIcon />}
+                  </a>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
