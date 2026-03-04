@@ -13,6 +13,13 @@ export const projects = [
     description: "Food Truck Locator is a production-ready, serverless web application that connects customers with local food truck businesses in real time. The platform supports multi-role authentication (customers and businesses), secure subscriptions, and business broadcast messaging using React, Go-based AWS Lambda microservices, DynamoDB, and Amazon Cognito. I designed and implemented the full system architecture, including role-based access control, JWT validation, DynamoDB query optimization, IAM least-privilege policies, and structured logging for observability."
   },
   {
+    title: "Send-a-file",
+    url: "https://github.com/lehig/Send-A-File",
+    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f?q=80&w=1693&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    shortDescription: "A C#/.NET peer-to-peer file transfer application that transmits files over TCP.",
+    description: "SendAFile is a peer-to-peer file transfer application built in C# and .NET that enables users on the same LAN or WAN to securely send and receive files through both standard and encrypted workflows. The project implements a hybrid cryptography model using AES-256 for fast file encryption and RSA-2048 for secure key exchange, allowing efficient transfers without the performance limitations of pure asymmetric encryption. It features a fully interactive terminal user interface (TUI) with multi-window dialogs, threaded progress bars for real-time transfer feedback, and automatic filename handling through byte-level metadata headers. Built on TCP sockets and CryptoStreams, the application demonstrates practical experience in network programming, applied cryptography, concurrent processing, and user-focused CLI design while balancing performance, security, and usability."
+  },
+  {
     title: "Row-Reduction Calculator — Interactive RREF Web App",
     url: "https://github.com/lehig/Row-Reduction",
     image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
@@ -25,13 +32,6 @@ export const projects = [
     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
     shortDescription: "A Go-based service for encrypted file storage and retrieval using GPG.",
     description: "A secure file encryption and decryption service written in Go, demonstrating practical use of GopenPGP for OpenPGP-compatible cryptography and integration with AWS S3 for storage and retrieval. This project includes CLI drivers showing how to encrypt files locally, upload them to an S3 bucket, and retrieve & decrypt them — encapsulating key management and secure data handling workflows. Designed to showcase secure backend development with cryptographic primitives, cloud storage integration, and real-world privacy tooling."
-  },
-  {
-    title: "Send-a-file",
-    url: "https://github.com/lehig/Send-A-File",
-    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f?q=80&w=1693&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    shortDescription: "A C#/.NET peer-to-peer file transfer application that transmits files over TCP.",
-    description: "SendAFile is a peer-to-peer file transfer application built in C# and .NET that enables users on the same LAN or WAN to securely send and receive files through both standard and encrypted workflows. The project implements a hybrid cryptography model using AES-256 for fast file encryption and RSA-2048 for secure key exchange, allowing efficient transfers without the performance limitations of pure asymmetric encryption. It features a fully interactive terminal user interface (TUI) with multi-window dialogs, threaded progress bars for real-time transfer feedback, and automatic filename handling through byte-level metadata headers. Built on TCP sockets and CryptoStreams, the application demonstrates practical experience in network programming, applied cryptography, concurrent processing, and user-focused CLI design while balancing performance, security, and usability."
   },
   {
     title: "WebCrawly",

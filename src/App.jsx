@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { aboutParagraphs, contactLinks, projects } from "./data/content";
+import InteractiveGrid from "./InteractiveGrid";
 
 const PAGES = ["about", "projects", "contact"];
 
@@ -90,6 +91,7 @@ export default function App() {
 
   return (
     <div className="page">
+      <InteractiveGrid />
       <div className="glow-container">
         <div className="glow glow-a" />
         <div className="glow glow-b" />
