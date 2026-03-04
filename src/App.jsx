@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { aboutParagraphs, contactLinks, projects } from "./data/content";
 
 const PAGES = ["about", "projects", "contact"];
@@ -19,6 +19,54 @@ const ExternalLinkIcon = () => (
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
   </svg>
 );
+
+const MagneticNavLink = ({ href, active, children }) => {
+  const containerRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const container = containerRef.current;
+    const button = buttonRef.current;
+    if (!container || !button) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate distance from center (magnetic strength)
+    const moveX = (x - rect.width / 2) * 0.05; // 0.2 = 20% movement (subtler)
+    const moveY = (y - rect.height / 2) * 0.05;
+
+    button.style.transition = 'none';
+    button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  };
+
+  const handleMouseLeave = () => {
+    const button = buttonRef.current;
+    if (!button) return;
+
+    // Restore CSS transitions and reset position
+    button.style.transition = '';
+    button.style.transform = `translate(0px, 0px)`;
+  };
+
+  return (
+    <div
+      className="nav-link-container"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <a
+        className={`nav-link ${active ? "active" : ""}`}
+        href={href}
+        ref={buttonRef}
+      >
+        {children}
+      </a>
+    </div>
+  );
+};
 
 export default function App() {
   const [page, setPage] = useState(() =>
@@ -48,15 +96,15 @@ export default function App() {
       </div>
 
       <nav className="top-nav animate-in" aria-label="Primary">
-        <a className={`nav-link ${page === "about" ? "active" : ""}`} href="#about">
+        <MagneticNavLink href="#about" active={page === "about"}>
           About
-        </a>
-        <a className={`nav-link ${page === "projects" ? "active" : ""}`} href="#projects">
+        </MagneticNavLink>
+        <MagneticNavLink href="#projects" active={page === "projects"}>
           Projects
-        </a>
-        <a className={`nav-link ${page === "contact" ? "active" : ""}`} href="#contact">
+        </MagneticNavLink>
+        <MagneticNavLink href="#contact" active={page === "contact"}>
           Contact
-        </a>
+        </MagneticNavLink>
       </nav>
 
       <header className="hero animate-in delay-1">

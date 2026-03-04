@@ -115,6 +115,8 @@ body::before {
 }
 
 .nav-link {
+  display: inline-block;
+  /* MUST be inline-block or block to accept transforms */
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.95rem;
@@ -125,6 +127,14 @@ body::before {
   position: relative;
 }
 
+.nav-link-container {
+  position: relative;
+  display: inline-flex;
+  padding: 50px;
+  margin: -50px;
+  /* offset the padding to not grow the navbar size */
+}
+
 .nav-link:hover {
   color: var(--text-primary);
 }
@@ -133,6 +143,9 @@ body::before {
   color: var(--accent);
   background: rgba(16, 185, 129, 0.15);
   box-shadow: inset 0 0 10px var(--accent-glow);
+  transition: transform 0.2s ease-out;
+  cursor: pointer;
+  z-index: 10;
 }
 
 /* Hero Typography */
